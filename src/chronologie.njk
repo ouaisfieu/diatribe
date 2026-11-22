@@ -1,0 +1,21 @@
+---
+title: Chronologie
+permalink: /chronologie/
+description: Tous les dossiers de Diatribe classés par décennie, de 1885 à aujourd'hui.
+bodyClass: page-liste
+---
+<header class="texte-tete">
+  <h1>Chronologie</h1>
+  <p class="chapeau">Tous les dossiers dans l'ordre où les faits ont commencé. Certains courent sur des décennies ; ils sont rangés à leur première année.</p>
+</header>
+
+{% include "partials/frise.njk" %}
+
+{%- for groupe in collections.dossiers | parDecennie %}
+<section class="decennie" id="annees-{{ groupe.decennie }}" aria-labelledby="dec-{{ groupe.decennie }}">
+  <h2 id="dec-{{ groupe.decennie }}" class="decennie-titre">Années {{ groupe.decennie }}</h2>
+  <ol class="lignes">
+    {%- for d in groupe.dossiers %}{% include "partials/ligne-dossier.njk" %}{% endfor %}
+  </ol>
+</section>
+{%- endfor %}

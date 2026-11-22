@@ -1,0 +1,13 @@
+---
+layout: layouts/base.njk
+bodyClass: page-texte
+---
+<article class="texte" data-pagefind-body>
+  <header class="texte-tete">
+    <h1>{{ title }}</h1>
+    {%- if chapeau %}<p class="chapeau">{{ chapeau | md | safe }}</p>{% endif %}
+  </header>
+  <div class="corps">
+    {{ content | safe }}
+  </div>
+</article>

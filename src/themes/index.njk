@@ -1,0 +1,20 @@
+---
+title: Thèmes
+permalink: /themes/
+description: Les dossiers de Diatribe regroupés en grandes rubriques.
+bodyClass: page-liste
+---
+<header class="texte-tete">
+  <h1>Thèmes</h1>
+  <p class="chapeau">{{ collections.parTheme | length }} rubriques. Un dossier peut relever de plusieurs d'entre elles ; il est alors listé partout où il a sa place.</p>
+</header>
+
+<ul class="themes-grille">
+  {%- for t in collections.parTheme %}
+  <li>
+    <a href="{{ '/themes/' + t.slug + '/' }}">{{ t.nom }}</a>
+    <span class="themes-nombre">{{ t.dossiers.length }} dossier{% if t.dossiers.length > 1 %}s{% endif %}</span>
+    <p>{{ t.description }}</p>
+  </li>
+  {%- endfor %}
+</ul>

@@ -1,0 +1,24 @@
+---
+pagination:
+  data: collections.parTheme
+  size: 1
+  alias: t
+permalink: "/themes/{{ t.slug }}/"
+eleventyComputed:
+  title: "{{ t.nom }}"
+  description: "{{ t.description }}"
+bodyClass: page-liste
+---
+<header class="texte-tete">
+  <p class="fil"><a href="{{ '/themes/' }}">Thèmes</a></p>
+  <h1>{{ t.nom }}</h1>
+  <p class="chapeau">{{ t.description }}</p>
+</header>
+
+{%- if t.dossiers.length %}
+<ol class="lignes">
+  {%- for d in t.dossiers %}{% include "partials/ligne-dossier.njk" %}{% endfor %}
+</ol>
+{%- else %}
+<p>Aucun dossier dans cette rubrique pour l'instant. <a href="{{ site.depot }}/issues/new">Proposez-en un</a>.</p>
+{%- endif %}

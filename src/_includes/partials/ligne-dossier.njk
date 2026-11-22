@@ -1,0 +1,9 @@
+{%- set st = d.data.statut | statut -%}
+<li class="ligne">
+  <span class="ligne-periode">{{ { debut: d.data.debut, fin: d.data.fin } | periode }}</span>
+  <div class="ligne-texte">
+    <a class="ligne-titre" href="{{ d.url }}">{{ d.data.title }}</a>
+    <p class="ligne-chapeau">{{ d.data.chapeau | md | safe }}</p>
+  </div>
+  <span class="tampon tampon--mini tampon--{{ st.slug }}" title="{{ st.description }}">{{ st.tampon }}</span>
+</li>

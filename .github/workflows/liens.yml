@@ -1,0 +1,41 @@
+name: Vérifier les liens des sources
+
+# Chaque lundi, vérifie que les sources citées répondent encore.
+# Un ticket est ouvert si des liens sont morts.
+on:
+  schedule:
+    - cron: "17 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  liens:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Vérifier les liens
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # 403 et 429 : beaucoup de médias bloquent les robots sans que la page ait disparu.
+          args: >-
+            --no-progress
+            --max-concurrency 4
+            --timeout 30
+            --max-retries 2
+            --accept '100..=103,200..=299,403,429'
+            'src/**/*.md'
+          output: ./lychee/rapport.md
+          fail: false
+
+      - name: Ouvrir un ticket
+        if: steps.lychee.outputs.exit_code != 0
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: Liens morts dans les sources
+          content-filepath: ./lychee/rapport.md
+          labels: liens-morts

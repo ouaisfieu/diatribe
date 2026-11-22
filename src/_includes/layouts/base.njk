@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="{{ site.langue }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title and page.url != "/" %}{{ title }} | {{ site.titre }}{% else %}{{ site.titre }}, le dossier à charge du Royaume de Belgique{% endif %}</title>
+  <meta name="description" content="{{ chapeau or description or site.description }}">
+  <meta name="referrer" content="no-referrer">
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:type" content="{% if layout == 'layouts/dossier.njk' %}article{% else %}website{% endif %}">
+  <meta property="og:title" content="{{ title or site.titre }}">
+  <meta property="og:description" content="{{ chapeau or description or site.description }}">
+  <meta property="og:locale" content="fr_BE">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <link rel="alternate" type="application/atom+xml" title="{{ site.titre }} : nouveaux dossiers" href="{{ '/flux.xml' }}">
+  <link rel="icon" href="{{ '/assets/favicon.svg' }}" type="image/svg+xml">
+  <link rel="preload" href="{{ '/assets/fonts/spectral-400.woff2' }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ '/assets/fonts/archivo-wdth.woff2' }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' }}">
+  {% block head %}{% endblock %}
+</head>
+<body class="{{ bodyClass }}">
+  <a class="evitement" href="#contenu">Aller au contenu</a>
+  <header class="bandeau">
+    <a class="marque" href="{{ '/' }}" {% if page.url == "/" %}aria-current="page"{% endif %}>Diatribe</a>
+    <nav aria-label="Navigation principale">
+      <ul>
+        {%- set liens = [
+          ["/", "Les dossiers"],
+          ["/chronologie/", "Chronologie"],
+          ["/themes/", "Thèmes"],
+          ["/sources/", "Sources"],
+          ["/methode/", "Méthode"],
+          ["/avocat-du-diable/", "Avocat du diable"],
+          ["/recherche/", "Rechercher"]
+        ] %}
+        {%- for l in liens %}
+        <li><a href="{{ l[0] }}"{% if page.url == l[0] or (l[0] != '/' and page.url.startsWith(l[0])) %} aria-current="page"{% endif %}>{{ l[1] }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+  </header>
+
+  <main id="contenu">
+    {{ content | safe }}
+  </main>
+
+  <footer class="pied">
+    <p>
+      Diatribe est un site anonyme, sans publicité, sans traceur et sans cookie.
+      Chaque affirmation renvoie à une source publique. Une erreur, un oubli, un droit de réponse ?
+      <a href="{{ site.depot }}/issues">Ouvrez un ticket sur le dépôt</a> ; la procédure est décrite dans la <a href="{{ '/methode/' }}">méthode</a>.
+    </p>
+    <p>
+      Textes sous licence <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr">CC BY-SA 4.0</a>, code sous licence MIT.
+      <a href="{{ '/flux.xml' }}">Flux Atom</a>. <a href="{{ site.depot }}">Code source</a>.
+      Dernière génération le {{ site.dateBuild | dateFr }}.
+    </p>
+  </footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

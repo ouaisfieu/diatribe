@@ -1,0 +1,33 @@
+{
+  "name": "diatribe",
+  "version": "1.0.0",
+  "description": "Le dossier à charge du Royaume de Belgique : site statique sourcé.",
+  "scripts": {
+    "dev": "PATH_PREFIX=/ eleventy --serve",
+    "build": "eleventy && pagefind --site _site",
+    "valider": "node scripts/valider-cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ouaisfieu/diatribe.git"
+  },
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/ouaisfieu/diatribe/issues"
+  },
+  "homepage": "https://github.com/ouaisfieu/diatribe#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.8",
+    "@fontsource-variable/archivo": "^5.3.0",
+    "@fontsource/spectral": "^5.3.0",
+    "markdown-it": "^15.0.3",
+    "markdown-it-anchor": "^10.1.0",
+    "markdown-it-footnote": "^4.0.0",
+    "pagefind": "^1.6.0"
+  },
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  }
+}

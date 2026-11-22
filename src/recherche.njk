@@ -1,0 +1,42 @@
+---
+title: Rechercher
+permalink: /recherche/
+description: Recherche plein texte dans tous les dossiers de Diatribe.
+bodyClass: page-recherche
+---
+<header class="texte-tete">
+  <h1>Rechercher</h1>
+  <p class="chapeau">Un nom, un parti, une commune, une année. La recherche se fait entièrement dans votre navigateur : aucune requête ne quitte le site.</p>
+</header>
+
+<div id="recherche" class="recherche"></div>
+<noscript><p>La recherche a besoin de JavaScript. À défaut, la <a href="{{ '/chronologie/' }}">chronologie</a> liste tous les dossiers.</p></noscript>
+
+<link rel="stylesheet" href="{{ '/pagefind/pagefind-ui.css' }}">
+<script src="{{ '/pagefind/pagefind-ui.js' }}"></script>
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    new PagefindUI({
+      element: "#recherche",
+      showSubResults: true,
+      showImages: false,
+      resetStyles: false,
+      translations: {
+        placeholder: "Chercher dans les dossiers",
+        clear_search: "Effacer",
+        load_more: "Plus de résultats",
+        search_label: "Chercher dans les dossiers",
+        filters_label: "Filtres",
+        zero_results: "Aucun dossier ne contient « [SEARCH_TERM] ».",
+        many_results: "[COUNT] résultats pour « [SEARCH_TERM] »",
+        one_result: "1 résultat pour « [SEARCH_TERM] »",
+        searching: "Recherche de « [SEARCH_TERM] »…",
+      },
+    });
+    const q = new URLSearchParams(location.search).get("q");
+    if (q) {
+      const champ = document.querySelector("#recherche input");
+      if (champ) { champ.value = q; champ.dispatchEvent(new Event("input")); }
+    }
+  });
+</script>

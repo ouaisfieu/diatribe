@@ -1,0 +1,50 @@
+---
+title: Les dossiers
+bodyClass: page-accueil
+---
+{%- set n = collections.dossiers | length -%}
+<section class="ouverture" aria-labelledby="titre-site">
+  <h1 id="titre-site" class="titre-site">Diatribe</h1>
+  <div class="ouverture-texte">
+    <p class="devise">Le dossier à charge du Royaume de Belgique, de 1885 à {{ site.dateBuild.getFullYear() }}.</p>
+    <p>
+      {{ n }} griefs, {{ collections.dossiers | totalNotes }} notes et sources, pas une affirmation sans pièce.
+      Ce site ne prétend pas être juste : il est à charge, et il l'assume.
+      Il prétend en revanche être exact. Chaque dossier dit sur quoi repose le reproche
+      (une condamnation, un rapport officiel, un consensus historique, un simple bilan politique)
+      et laisse la parole à la défense. La défense générale du pays a sa propre page :
+      <a href="{{ '/avocat-du-diable/' }}">l'avocat du diable</a>.
+    </p>
+  </div>
+</section>
+
+{% include "partials/frise.njk" %}
+
+<section class="role" aria-labelledby="role-titre">
+  <h2 id="role-titre" class="visuellement-cache">Tous les dossiers, par thème</h2>
+  {%- for t in collections.parTheme %}
+  {%- if t.principaux.length %}
+  <section class="role-theme" id="{{ t.slug }}" aria-labelledby="theme-{{ t.slug }}">
+    <header class="role-tete">
+      <h3 id="theme-{{ t.slug }}"><a href="{{ '/themes/' + t.slug + '/' }}">{{ t.nom }}</a></h3>
+      <p>{{ t.description }}{% if t.dossiers.length > t.principaux.length %} <a class="role-plus" href="{{ '/themes/' + t.slug + '/' }}">Voir aussi {{ t.dossiers.length - t.principaux.length }} dossier{% if (t.dossiers.length - t.principaux.length) > 1 %}s{% endif %} lié{% if (t.dossiers.length - t.principaux.length) > 1 %}s{% endif %}.</a>{% endif %}</p>
+    </header>
+    <ol class="lignes">
+      {%- for d in t.principaux %}{% include "partials/ligne-dossier.njk" %}{% endfor %}
+    </ol>
+  </section>
+  {%- endif %}
+  {%- endfor %}
+</section>
+
+<section class="legende" aria-labelledby="legende-titre">
+  <h2 id="legende-titre">Comment lire les tampons</h2>
+  <dl class="legende-liste">
+    {%- for s in statuts %}
+    <div>
+      <dt><span class="tampon tampon--{{ s.slug }}">{{ s.tampon }}</span></dt>
+      <dd>{{ s.description }}</dd>
+    </div>
+    {%- endfor %}
+  </dl>
+</section>

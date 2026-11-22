@@ -1,0 +1,53 @@
+---
+layout: layouts/base.njk
+bodyClass: page-dossier
+---
+{%- set st = statut | statut -%}
+{%- set th = theme | theme -%}
+{%- set tous = collections.dossiers -%}
+{%- set precedent = tous | getPreviousCollectionItem(page) -%}
+{%- set suivant = tous | getNextCollectionItem(page) -%}
+<article class="dossier" data-pagefind-body>
+  <header class="dossier-tete">
+    <p class="dossier-periode" data-pagefind-meta="periode">{{ { debut: debut, fin: fin } | periode }}</p>
+    <h1>{{ title }}</h1>
+    <p class="chapeau">{{ chapeau | md | safe }}</p>
+  </header>
+
+  <aside class="fiche" aria-label="Fiche du dossier">
+    <p class="tampon tampon--{{ st.slug }}" data-pagefind-filter="statut">{{ st.tampon }}</p>
+    <p class="fiche-statut">{{ st.description }}</p>
+    <dl>
+      <div><dt>Thème</dt><dd><a href="{{ '/themes/' + th.slug + '/' }}" data-pagefind-filter="theme">{{ th.nom }}</a></dd></div>
+      <div><dt>Mis en cause</dt><dd>{{ acteurs | enListe }}</dd></div>
+      <div><dt>Sources citées</dt><dd>{{ page | nbNotesPage(collections.dossiers) }}</dd></div>
+      <div><dt>Vérifié le</dt><dd><time datetime="{{ verifie | dateIso }}">{{ verifie | dateFr }}</time></dd></div>
+    </dl>
+    {%- if chiffres %}
+    <ul class="chiffres" aria-label="Chiffres clés">
+      {%- for c in chiffres %}
+      <li><mark>{{ c.valeur }}</mark> {{ c.texte | md | safe }}</li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
+  </aside>
+
+  <div class="corps">
+    {{ content | safe }}
+  </div>
+</article>
+
+<nav class="voisins" aria-label="Dossiers voisins dans la chronologie" data-pagefind-ignore>
+  {%- if precedent %}
+  <a class="voisin voisin--prec" href="{{ precedent.url }}" rel="prev">
+    <span class="voisin-sens">Dossier précédent</span>
+    <span class="voisin-titre">{{ precedent.data.title }}</span>
+  </a>
+  {%- endif %}
+  {%- if suivant %}
+  <a class="voisin voisin--suiv" href="{{ suivant.url }}" rel="next">
+    <span class="voisin-sens">Dossier suivant</span>
+    <span class="voisin-titre">{{ suivant.data.title }}</span>
+  </a>
+  {%- endif %}
+</nav>

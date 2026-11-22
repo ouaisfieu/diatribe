@@ -1,0 +1,38 @@
+name: Droit de réponse ou argument en défense
+description: Vous êtes mis en cause, ou vous avez un argument en défense à ajouter.
+title: "[Réponse] "
+labels: [droit-de-reponse]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Les tickets sont publics. N'y indiquez aucune donnée personnelle que vous ne souhaitez pas voir publiée.
+  - type: input
+    id: page
+    attributes:
+      label: Page concernée
+      description: L'adresse de la page, le titre du dossier, ou « avocat du diable ».
+    validations:
+      required: true
+  - type: dropdown
+    id: qualite
+    attributes:
+      label: Vous intervenez en tant que
+      options:
+        - Personne ou organisation mise en cause
+        - Représentant d'une personne ou organisation mise en cause
+        - Lecteur ou lectrice
+    validations:
+      required: true
+  - type: textarea
+    id: reponse
+    attributes:
+      label: Votre réponse
+      description: Elle sera résumée dans la section « Ce que répondent les intéressés » du dossier, ou dans la page « L'avocat du diable ».
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: Où cette position a-t-elle été exprimée publiquement, ou quel document l'établit ?

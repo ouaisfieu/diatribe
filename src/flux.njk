@@ -1,0 +1,24 @@
+---
+permalink: /flux.xml
+eleventyExcludeFromCollections: true
+layout: false
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="fr">
+  <title>Diatribe, le dossier à charge du Royaume de Belgique</title>
+  <subtitle>{{ site.description }}</subtitle>
+  <link href="{{ site.url }}/flux.xml" rel="self"/>
+  <link href="{{ site.url }}/"/>
+  <id>{{ site.url }}/</id>
+  <updated>{{ site.dateBuild.toISOString() }}</updated>
+  <author><name>Diatribe</name></author>
+  {%- for d in collections.dossiers | reverse %}
+  <entry>
+    <title>{{ d.data.title }}</title>
+    <link href="{{ site.url }}{{ d.url }}"/>
+    <id>{{ site.url }}{{ d.url }}</id>
+    <updated>{{ d.data.verifie | dateIso }}T00:00:00Z</updated>
+    <summary>{{ d.data.chapeau }}</summary>
+  </entry>
+  {%- endfor %}
+</feed>

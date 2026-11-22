@@ -1,0 +1,26 @@
+{%- set items = collections.dossiers | frise -%}
+{%- set nPistes = items | pistes -%}
+<figure class="frise" aria-labelledby="frise-legende">
+  <div class="frise-defilement">
+    <div class="frise-piste" style="--pistes: {{ nPistes }}">
+      {%- for an in [1880, 1900, 1920, 1940, 1960, 1980, 2000, 2020] %}
+      <span class="frise-repere" style="left: {{ an | positionAnnee }}%" aria-hidden="true">{{ an }}</span>
+      {%- endfor %}
+      {%- for i in items %}
+      <a class="frise-marque frise-marque--{{ i.d.data.statut }}{% if i.enCours %} frise-marque--ouverte{% endif %}"
+         href="{{ i.d.url }}"
+         style="left: {{ i.gauche }}%; width: {{ i.largeur }}%; --piste: {{ i.piste }}"
+         data-titre="{{ { debut: i.d.data.debut, fin: i.d.data.fin } | periode }} : {{ i.d.data.title }}">
+        <span class="visuellement-cache">{{ { debut: i.d.data.debut, fin: i.d.data.fin } | periode }} : {{ i.d.data.title }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+  <figcaption id="frise-legende">
+    Chaque trait est un dossier, de sa première à sa dernière année.
+    En <span class="pastille pastille--condamnation">rouge</span>, une condamnation ;
+    en <span class="pastille pastille--constat">noir</span>, un constat officiel ou un fait historique ;
+    en <span class="pastille pastille--procedure">pointillé</span>, une procédure en cours ;
+    en <span class="pastille pastille--bilan">gris</span>, un bilan politique, une affaire non élucidée ou un acquittement.
+  </figcaption>
+</figure>

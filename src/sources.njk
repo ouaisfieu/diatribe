@@ -1,0 +1,35 @@
+---
+title: Sources
+permalink: /sources/
+description: Toutes les sources citées dans les dossiers de Diatribe, regroupées par site.
+bodyClass: page-liste
+---
+{%- set nSources = 0 -%}
+{%- for g in collections.sources %}{% set nSources = nSources + g.liste.length %}{% endfor -%}
+<header class="texte-tete">
+  <h1>Sources</h1>
+  <p class="chapeau">
+    {{ nSources }} documents en ligne, publiés par {{ collections.sources | length }} sites différents, cités dans {{ collections.dossiers | length }} dossiers.
+    Les liens sont vérifiés chaque semaine par un robot ; un lien mort ouvre automatiquement un ticket sur le dépôt.
+  </p>
+</header>
+
+<p class="sources-sommaire">
+  Classement par nombre de documents cités. Les sites officiels (Chambre, Sénat, juridictions, Cour des comptes, institutions européennes) et les grands médias belges dominent, ce qui est voulu.
+</p>
+
+{%- for g in collections.sources %}
+<section class="sources-domaine" aria-labelledby="dom-{{ loop.index }}">
+  <h2 id="dom-{{ loop.index }}">{{ g.domaine }} <span class="sources-nombre">{{ g.liste.length }}</span></h2>
+  <ul>
+    {%- for s in g.liste %}
+    <li>
+      <a href="{{ s.url }}" rel="noopener noreferrer external">{{ s.libelle or s.url }}</a>
+      <span class="sources-cite">Cité dans
+        {%- for d in s.dossiers %} <a href="{{ d.url }}">{{ d.titre }}</a>{% if not loop.last %},{% endif %}{% endfor %}.
+      </span>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endfor %}

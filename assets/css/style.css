@@ -1,0 +1,379 @@
+/* Diatribe : feuille de style unique.
+   Univers : le dossier à charge. Papier administratif froid, encre bleu-noir,
+   tampons rouges pour les condamnations, surligneur jaune pour les chiffres. */
+
+@font-face {
+  font-family: "Spectral";
+  src: url("../fonts/spectral-400.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Spectral";
+  src: url("../fonts/spectral-ext-400.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Spectral";
+  src: url("../fonts/spectral-400-italic.woff2") format("woff2");
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Spectral";
+  src: url("../fonts/spectral-600.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Spectral";
+  src: url("../fonts/spectral-700.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("../fonts/archivo-wdth.woff2") format("woff2");
+  font-weight: 100 900; font-stretch: 62% 125%; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("../fonts/archivo-ext-wdth.woff2") format("woff2");
+  font-weight: 100 900; font-stretch: 62% 125%; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+  --papier: #f5f6f3;
+  --papier-fonce: #e9ebe6;
+  --encre: #1c2230;
+  --encre-douce: #4e5566;
+  --filet: #c6cad2;
+  --tampon: #b8231a;
+  --surligneur: #ffd84d;
+  --lien-survol: #b8231a;
+
+  --serif: "Spectral", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --grotesque: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+
+  --mesure: 66ch;
+  --gouttiere: clamp(1rem, 4vw, 3rem);
+  --largeur-max: 78rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --papier: #151821;
+    --papier-fonce: #1d212c;
+    --encre: #e3e5ea;
+    --encre-douce: #a3a9b6;
+    --filet: #363b48;
+    --tampon: #ff6a5c;
+    --surligneur: #8a6d00;
+    --lien-survol: #ff6a5c;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 1rem;
+}
+
+body {
+  margin: 0;
+  background: var(--papier);
+  color: var(--encre);
+  font-family: var(--serif);
+  font-size: clamp(1.0625rem, 0.98rem + 0.3vw, 1.1875rem);
+  line-height: 1.62;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  hanging-punctuation: first;
+}
+
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+a:hover { color: var(--lien-survol); text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--tampon); outline-offset: 3px; border-radius: 1px; }
+
+.visuellement-cache {
+  position: absolute !important; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+.evitement { position: absolute; left: -999px; top: 0; padding: 0.5rem 1rem; background: var(--encre); color: var(--papier); z-index: 10; }
+.evitement:focus { left: 1rem; }
+
+/* ---------- Bandeau ---------- */
+.bandeau {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 2rem;
+  max-width: var(--largeur-max); margin: 0 auto;
+  padding: 1.1rem var(--gouttiere) 0.9rem;
+  border-bottom: 1px solid var(--filet);
+  font-family: var(--grotesque);
+}
+.marque {
+  font-weight: 850; font-stretch: 70%; font-size: 1.5rem; letter-spacing: -0.01em;
+  text-decoration: none; color: var(--tampon);
+}
+.bandeau ul { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; list-style: none; margin: 0; padding: 0; }
+.bandeau nav a {
+  font-size: 0.95rem; font-weight: 500; font-stretch: 90%;
+  text-decoration: none; color: var(--encre-douce);
+}
+.bandeau nav a:hover { color: var(--encre); text-decoration: underline; }
+.bandeau nav a[aria-current="page"] { color: var(--encre); text-decoration: underline; text-decoration-color: var(--tampon); text-decoration-thickness: 2px; }
+
+main { max-width: var(--largeur-max); margin: 0 auto; padding: 0 var(--gouttiere) 4rem; }
+
+/* ---------- Titres ---------- */
+h1, h2, h3 { font-family: var(--grotesque); color: var(--encre); text-wrap: balance; }
+h1 { font-weight: 800; font-stretch: 72%; font-size: clamp(2.3rem, 1.6rem + 3.4vw, 4.2rem); line-height: 1.0; letter-spacing: -0.012em; margin: 0 0 1rem; }
+h2 { font-weight: 720; font-stretch: 82%; font-size: clamp(1.45rem, 1.25rem + 0.8vw, 1.85rem); line-height: 1.15; margin: 2.6rem 0 0.8rem; }
+h3 { font-weight: 680; font-stretch: 88%; font-size: 1.2rem; line-height: 1.25; margin: 2rem 0 0.5rem; }
+
+.chapeau { font-size: 1.22em; line-height: 1.45; color: var(--encre); max-width: 38em; margin: 0; }
+
+/* ---------- Accueil ---------- */
+.ouverture {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem 3rem;
+  padding: clamp(2rem, 6vw, 4.5rem) 0 2rem;
+  align-items: end;
+}
+@media (min-width: 60rem) { .ouverture { grid-template-columns: auto minmax(0, 1fr); } }
+.titre-site {
+  font-weight: 900; font-stretch: 62%;
+  font-size: clamp(5rem, 2rem + 15vw, 13rem);
+  line-height: 0.78; letter-spacing: -0.035em;
+  margin: 0; color: var(--tampon);
+}
+.ouverture-texte { max-width: 40em; padding-bottom: 0.4rem; }
+.devise { font-family: var(--grotesque); font-weight: 650; font-stretch: 85%; font-size: clamp(1.35rem, 1.1rem + 1vw, 1.9rem); line-height: 1.15; margin: 0 0 0.9rem; }
+.ouverture-texte p:not(.devise) { margin: 0; color: var(--encre-douce); }
+.ouverture-texte a { color: var(--encre); }
+
+/* ---------- Frise ---------- */
+.frise { margin: 1rem 0 3rem; }
+.frise-defilement { overflow-x: auto; padding: 0.5rem 0 0.25rem; scrollbar-width: thin; }
+.frise-piste {
+  --hauteur-piste: 11px;
+  position: relative; min-width: 56rem;
+  height: calc(var(--pistes) * var(--hauteur-piste) + 2.2rem);
+  border-bottom: 2px solid var(--encre);
+  background-image: repeating-linear-gradient(to right, transparent 0, transparent calc(100% / 15 - 1px), var(--filet) calc(100% / 15 - 1px), var(--filet) calc(100% / 15));
+  background-size: 100% calc(100% - 1.6rem); background-repeat: no-repeat; background-position: 0 0;
+}
+.frise-repere {
+  position: absolute; bottom: -1.6rem; transform: translateX(-50%);
+  font-family: var(--grotesque); font-size: 0.8rem; font-stretch: 85%; font-variant-numeric: tabular-nums; color: var(--encre-douce);
+}
+.frise-repere::before { content: ""; position: absolute; left: 50%; top: -0.5rem; height: 0.4rem; border-left: 2px solid var(--encre); }
+.frise-marque {
+  position: absolute; bottom: calc(0.4rem + var(--piste) * var(--hauteur-piste));
+  height: 7px; min-width: 7px; border-radius: 1px;
+  background: var(--encre);
+}
+.frise-marque--condamnation { background: var(--tampon); }
+.frise-marque--constat, .frise-marque--histoire { background: var(--encre); }
+.frise-marque--procedure { background: transparent; border: 2px dashed var(--encre); height: 7px; }
+.frise-marque--bilan, .frise-marque--non-elucide, .frise-marque--acquitte { background: var(--encre-douce); opacity: 0.55; }
+.frise-marque--ouverte { border-right: 0; -webkit-mask-image: linear-gradient(to right, #000 85%, transparent); mask-image: linear-gradient(to right, #000 85%, transparent); }
+.frise-marque:hover, .frise-marque:focus-visible { outline: 2px solid var(--tampon); outline-offset: 2px; opacity: 1; z-index: 2; }
+.frise-marque::after {
+  content: attr(data-titre);
+  position: absolute; bottom: calc(100% + 8px); left: 0;
+  width: max-content; max-width: 22rem;
+  padding: 0.35rem 0.6rem; background: var(--encre); color: var(--papier);
+  font-family: var(--grotesque); font-size: 0.85rem; font-stretch: 90%; line-height: 1.3;
+  opacity: 0; pointer-events: none; transition: opacity 120ms;
+}
+.frise-marque:hover::after, .frise-marque:focus-visible::after { opacity: 1; }
+.frise figcaption { margin-top: 2.2rem; max-width: 60em; font-family: var(--grotesque); font-stretch: 92%; font-size: 0.9rem; line-height: 1.5; color: var(--encre-douce); }
+.pastille { white-space: nowrap; }
+.pastille::before { content: ""; display: inline-block; width: 1.4em; height: 0.45em; margin-right: 0.3em; vertical-align: 0.15em; background: var(--encre); }
+.pastille--condamnation::before { background: var(--tampon); }
+.pastille--procedure::before { background: transparent; border: 2px dashed var(--encre); height: 0.55em; }
+.pastille--bilan::before { background: var(--encre-douce); opacity: 0.55; }
+
+/* ---------- Le rôle (listes de dossiers) ---------- */
+.role-theme { margin-top: 3.2rem; }
+.role-tete { display: grid; gap: 0.2rem 2rem; border-top: 3px solid var(--encre); padding-top: 0.6rem; }
+@media (min-width: 52rem) { .role-tete { grid-template-columns: 16rem minmax(0, 1fr); align-items: baseline; } }
+.role-tete h3 { margin: 0; font-size: 1.45rem; font-stretch: 78%; font-weight: 780; }
+.role-tete h3 a { text-decoration: none; }
+.role-tete h3 a:hover { text-decoration: underline; }
+.role-tete p { margin: 0; color: var(--encre-douce); max-width: 44em; }
+
+.lignes { list-style: none; margin: 0.8rem 0 0; padding: 0; }
+.ligne {
+  display: grid; gap: 0.15rem 1.5rem;
+  grid-template-columns: minmax(0, 1fr);
+  padding: 0.9rem 0; border-bottom: 1px solid var(--filet);
+}
+@media (min-width: 52rem) {
+  .ligne { grid-template-columns: 16rem minmax(0, 1fr) 11rem; align-items: baseline; }
+}
+.ligne-periode { font-family: var(--grotesque); font-stretch: 88%; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--encre-douce); }
+.ligne-titre { font-family: var(--grotesque); font-weight: 700; font-stretch: 86%; font-size: 1.18rem; line-height: 1.25; text-decoration: none; }
+.ligne-titre:hover { text-decoration: underline; }
+.ligne-chapeau { margin: 0.2rem 0 0; color: var(--encre-douce); max-width: 46em; font-size: 0.98em; line-height: 1.5; }
+.ligne .tampon { justify-self: start; }
+@media (min-width: 52rem) { .ligne .tampon { justify-self: end; } }
+
+/* ---------- Tampons ---------- */
+.tampon {
+  display: inline-block;
+  font-family: var(--grotesque); font-weight: 800; font-stretch: 78%;
+  font-size: 1.05rem; line-height: 1.1; letter-spacing: 0.01em;
+  color: var(--encre); border: 3px double currentColor;
+  padding: 0.3em 0.6em 0.25em; margin: 0;
+  transform: rotate(-2.5deg); transform-origin: left center;
+}
+.tampon--condamnation { color: var(--tampon); }
+.tampon--procedure { border-style: dashed; border-width: 2px; }
+.tampon--bilan, .tampon--non-elucide, .tampon--acquitte { color: var(--encre-douce); }
+.tampon--mini { font-size: 0.8rem; border-width: 3px; padding: 0.2em 0.45em 0.15em; transform: rotate(-1.5deg); white-space: nowrap; }
+.tampon--mini.tampon--procedure { border-width: 2px; }
+
+/* ---------- Légende ---------- */
+.legende { margin-top: 4rem; border-top: 3px solid var(--encre); padding-top: 0.4rem; }
+.legende h2 { margin-top: 0.8rem; }
+.legende-liste { display: grid; gap: 1.2rem 2.5rem; margin: 1.2rem 0 0; }
+@media (min-width: 52rem) { .legende-liste { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.legende-liste div { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 1rem; align-items: start; }
+.legende-liste dd { margin: 0; color: var(--encre-douce); font-size: 0.95em; }
+/* Dans une colonne de texte, la légende passe sur une seule colonne. */
+.corps .legende-liste { grid-template-columns: minmax(0, 1fr); margin: 1.5rem 0; }
+.corps .legende-liste div { grid-template-columns: 10.5rem minmax(0, 1fr); }
+.corps .legende-liste dd { hyphens: manual; }
+@media (max-width: 30rem) { .legende-liste div, .corps .legende-liste div { grid-template-columns: minmax(0, 1fr); gap: 0.4rem; } }
+
+/* ---------- Page dossier ---------- */
+.dossier {
+  display: grid; gap: 0 clamp(2rem, 5vw, 4.5rem);
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "tete" "fiche" "corps";
+  padding-top: clamp(1.5rem, 5vw, 3.5rem);
+}
+@media (min-width: 64rem) {
+  .dossier { grid-template-columns: 17rem minmax(0, var(--mesure)); grid-template-areas: "vide tete" "fiche corps"; }
+}
+.dossier-tete { grid-area: tete; padding-bottom: 1.6rem; }
+.dossier-periode { font-family: var(--grotesque); font-weight: 700; font-stretch: 80%; font-size: 1.3rem; font-variant-numeric: tabular-nums; color: var(--tampon); margin: 0 0 0.4rem; }
+.fiche { grid-area: fiche; align-self: start; margin-bottom: 2rem; }
+@media (min-width: 64rem) { .fiche { position: sticky; top: 1.5rem; } }
+.fiche .tampon { font-size: 1.25rem; }
+.fiche-statut { font-size: 0.9rem; line-height: 1.45; color: var(--encre-douce); margin: 0.9rem 0 1.2rem; }
+.fiche dl { margin: 0; border-top: 1px solid var(--filet); }
+.fiche dl div { padding: 0.5rem 0; border-bottom: 1px solid var(--filet); }
+.fiche dt { font-family: var(--grotesque); font-size: 0.82rem; font-weight: 600; font-stretch: 90%; color: var(--encre-douce); }
+.fiche dd { margin: 0.1rem 0 0; font-size: 0.95rem; line-height: 1.4; }
+.chiffres { list-style: none; margin: 1.4rem 0 0; padding: 0; display: grid; gap: 0.9rem; }
+.chiffres li { font-size: 0.93rem; line-height: 1.4; }
+.chiffres mark { display: block; font-family: var(--grotesque); font-weight: 800; font-stretch: 75%; font-size: 1.6rem; line-height: 1.1; width: fit-content; }
+
+mark {
+  color: inherit;
+  background: linear-gradient(to bottom, transparent 52%, var(--surligneur) 52%, var(--surligneur) 92%, transparent 92%);
+  padding: 0 0.1em;
+}
+
+.corps { grid-area: corps; max-width: var(--mesure); }
+.corps > :first-child { margin-top: 0; }
+.corps h2 { border-top: 1px solid var(--filet); padding-top: 1.1rem; }
+.corps p, .corps li { hyphens: auto; -webkit-hyphens: auto; }
+.corps ul, .corps ol { padding-left: 1.3em; }
+.corps li + li { margin-top: 0.35em; }
+.corps blockquote { margin: 1.5rem 0; padding: 0.2rem 0 0.2rem 1.2rem; border-left: 3px solid var(--tampon); font-style: italic; }
+.corps table { border-collapse: collapse; width: 100%; font-size: 0.92em; margin: 1.5rem 0; }
+.corps th, .corps td { text-align: left; padding: 0.45rem 0.6rem 0.45rem 0; border-bottom: 1px solid var(--filet); vertical-align: top; }
+.corps th { font-family: var(--grotesque); font-stretch: 90%; font-weight: 650; }
+.corps td:last-child, .corps th:last-child { padding-right: 0; }
+.corps .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Appels de note */
+.footnote-ref a, sup a[href^="#fn"] { text-decoration: none; font-family: var(--grotesque); font-weight: 700; font-size: 0.78em; color: var(--tampon); padding: 0 0.1em; }
+.footnote-ref a::before { content: "["; } .footnote-ref a::after { content: "]"; }
+sup { line-height: 0; }
+
+/* Bloc des notes */
+.notes { margin-top: 3rem; border-top: 3px solid var(--encre); }
+.notes h2 { border-top: 0; margin-top: 0.8rem; }
+.notes-liste { padding-left: 1.6em; font-size: 0.9rem; line-height: 1.5; }
+.notes-liste li { padding-left: 0.3em; margin-top: 0.55em; overflow-wrap: anywhere; }
+.notes-liste li::marker { font-family: var(--grotesque); font-weight: 700; color: var(--tampon); font-variant-numeric: tabular-nums; }
+.notes-liste p { margin: 0; display: inline; }
+.notes-liste .retour { text-decoration: none; color: var(--encre-douce); }
+.notes-liste li:target { background: color-mix(in srgb, var(--surligneur) 35%, transparent); }
+
+.encadre {
+  margin: 2rem 0; padding: 1rem 1.2rem; background: var(--papier-fonce);
+  border-left: 4px solid var(--encre);
+}
+.encadre > :first-child { margin-top: 0; } .encadre > :last-child { margin-bottom: 0; }
+
+/* Voisins */
+.voisins { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); margin: 4rem 0 0; border-top: 1px solid var(--filet); padding-top: 1.2rem; }
+@media (min-width: 48rem) { .voisins { grid-template-columns: 1fr 1fr; } }
+.voisin { text-decoration: none; display: grid; gap: 0.15rem; }
+.voisin--suiv { text-align: right; grid-column: -2; }
+.voisin-sens { font-family: var(--grotesque); font-size: 0.85rem; font-stretch: 90%; color: var(--encre-douce); }
+.voisin-titre { font-family: var(--grotesque); font-weight: 700; font-stretch: 86%; font-size: 1.1rem; }
+.voisin:hover .voisin-titre { text-decoration: underline; }
+
+/* ---------- Pages de texte ---------- */
+.texte, .page-liste main > header { padding-top: clamp(1.5rem, 5vw, 3.5rem); }
+.texte-tete { max-width: 52rem; padding-bottom: 1.6rem; }
+.texte .corps { max-width: var(--mesure); }
+.fil { font-family: var(--grotesque); font-stretch: 90%; font-size: 0.95rem; margin: 0 0 0.5rem; color: var(--encre-douce); }
+
+.decennie { margin-top: 2.8rem; }
+.decennie-titre { margin: 0; border-top: 3px solid var(--encre); padding-top: 0.5rem; font-stretch: 75%; font-size: 1.8rem; }
+
+.themes-grille { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 0 2.5rem; }
+@media (min-width: 52rem) { .themes-grille { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.themes-grille li { border-top: 3px solid var(--encre); padding: 0.6rem 0 1.6rem; }
+.themes-grille a { font-family: var(--grotesque); font-weight: 780; font-stretch: 78%; font-size: 1.5rem; text-decoration: none; }
+.themes-grille a:hover { text-decoration: underline; }
+.themes-nombre { display: block; font-family: var(--grotesque); font-stretch: 90%; font-size: 0.9rem; color: var(--tampon); font-weight: 600; }
+.themes-grille p { margin: 0.4rem 0 0; color: var(--encre-douce); }
+
+.sources-sommaire { max-width: var(--mesure); color: var(--encre-douce); }
+.sources-domaine { margin-top: 2.2rem; }
+.sources-domaine h2 { font-stretch: 88%; font-size: 1.3rem; border-top: 3px solid var(--encre); padding-top: 0.5rem; margin: 0; }
+.sources-nombre { font-weight: 500; color: var(--tampon); margin-left: 0.4rem; }
+.sources-domaine ul { padding-left: 1.2em; max-width: 60rem; }
+.sources-domaine li { margin-top: 0.6rem; overflow-wrap: anywhere; line-height: 1.45; }
+.sources-cite { display: block; font-size: 0.88rem; color: var(--encre-douce); }
+
+/* ---------- Recherche (Pagefind) ---------- */
+.recherche {
+  --pagefind-ui-scale: 0.95;
+  --pagefind-ui-primary: var(--tampon);
+  --pagefind-ui-text: var(--encre);
+  --pagefind-ui-background: var(--papier);
+  --pagefind-ui-border: var(--filet);
+  --pagefind-ui-tag: var(--papier-fonce);
+  --pagefind-ui-border-width: 2px;
+  --pagefind-ui-border-radius: 2px;
+  --pagefind-ui-font: var(--serif);
+  max-width: 52rem;
+}
+
+/* ---------- Pied ---------- */
+.pied {
+  max-width: var(--largeur-max); margin: 0 auto; padding: 1.5rem var(--gouttiere) 3rem;
+  border-top: 1px solid var(--filet);
+  font-family: var(--grotesque); font-stretch: 92%; font-size: 0.9rem; line-height: 1.5; color: var(--encre-douce);
+}
+.pied p { max-width: 62em; margin: 0 0 0.6rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}
+
+@media print {
+  .bandeau nav, .voisins, .frise, .evitement { display: none; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .fiche { position: static; }
+  a[href^="http"]::after { content: " <" attr(href) ">"; font-size: 0.8em; overflow-wrap: anywhere; }
+  .notes-liste a[href^="http"]::after { content: ""; }
+}
